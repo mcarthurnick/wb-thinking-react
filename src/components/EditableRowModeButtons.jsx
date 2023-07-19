@@ -1,16 +1,17 @@
 import './InvoiceTable.css';
 
 
-const EditableRowModeButtons = ({isEditing}) => {
+const EditableRowModeButtons = ({isEditing, onEditClick, onSaveClick, deleteClick}) => {
+    
     
     return isEditing ? (
         <td>
-            <button>Save</button>
+            <button onClick={onSaveClick}>Save</button>
         </td>
     ) : (
         <td>
-            <button>Delete</button>
-            <button>Edit</button>
+            <button onClick={deleteClick}>Delete</button>
+            <button onClick={onEditClick}>Edit</button>
         </td>
     )
 }

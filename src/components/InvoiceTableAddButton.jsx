@@ -1,12 +1,12 @@
 import './InvoiceTable.css';
 
-const InvoiceTableAddButton = () => {
+const InvoiceTableAddButton = ({onAddClick}) => {
 
     return (
         <tr>
             <td></td>
             <td colSpan='4'>
-                <button>Add</button>
+                <button onClick={onAddClick}>Add</button>
             </td>
         </tr>
     )

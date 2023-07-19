@@ -1,9 +1,9 @@
 import './InvoiceTable.css';
 
-const EditableHoursCell = ({value, isEditing}) => {
+const EditableHoursCell = ({value, isEditing, onValueChange}) => {
     return isEditing ? (
         <td>
-            $<input type="text" value={value}/> /hr
+            $<input type="text" value={value} onChange={(e) => onValueChange(e.target.value)}/>
         </td>
     ) : (
         <td>
