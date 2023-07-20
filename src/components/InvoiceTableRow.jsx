@@ -4,17 +4,32 @@ import EditableDescriptionCell from './EditableDescriptionCell';
 import EditableRateCell from './EditableRateCell';
 import EditableHoursCell from './EditableHoursCell';
 import formatCurrency from '../utils/formatCurrency';
+import axios from 'axios';
 
 import { useState } from 'react';
 
-const InvoiceTableRow = ({initialInvoiceData, initialIsEditing, onDeleteClick}) => {
+const InvoiceTableRow = ({initialInvoiceData, initialIsEditing, onDeleteClick, id}) => {
     const [isEditing, setIsEditing] = useState(initialIsEditing)
     const [description, setDescription] = useState(initialInvoiceData.description)
     const [rate, setRate] = useState(initialInvoiceData.rate)
     const [hours, setHours] = useState(initialInvoiceData.hours)
 
     const setEditMode = () => setIsEditing(true)
-    const setNormalMode = () => setIsEditing(false)
+    const setNormalMode = async () => {
+        const {data} = await axios.post(`/api/invoice/${id}`, {
+            description,
+            rate,
+            hours
+        })
+
+        if(!data.error){
+            setDescription(data.description)
+            setRate(data.rate)
+            setHours(data.hours)
+        }
+
+        setIsEditing(false)
+    }
 
     return (
         <tr>
